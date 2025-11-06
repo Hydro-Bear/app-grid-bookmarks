@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# App Grid Bookmarks
 
-## Getting Started
+A production-ready Next.js + TypeScript single page that mirrors an iPhone-style grid of bookmark “apps”. The experience includes animated shared-element transitions, a detail panel with deep-linking, persistent layout controls, and URL-synchronised filters.
 
-First, run the development server:
+## Quick Start
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev` – start the local dev server.
+- `npm run build` – type-check and build for production.
+- `npm run start` – serve the production build.
+- `npm run lint` – run ESLint (core-web-vitals rules).
+- `npm run type-check` – run `tsc` without emitting output.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+public/
+  data/bookmarks.json      ← content & default layout values
+  icons/*.svg              ← lightweight bookmark glyphs
+src/
+  app/
+    page.tsx               ← server component loading the JSON + client shell
+    layout.tsx             ← global shell, fonts, metadata
+    globals.css            ← design tokens + Tailwind layers
+  components/
+    HomeClient.tsx         ← query-sync logic, filters, layout & details overlay
+    AppTile.tsx            ← animated tile with icon/label interactions
+    ControlsBar.tsx        ← icon size, gap, radius, column controls (persisted)
+    Filters.tsx            ← tags, search, sort controls tied to URL params
+    DetailsPanel.tsx       ← shared-element detail view, copy/share actions
+  lib/
+    data/types.ts          ← Bookmark / Settings contracts
+    data/loaders.ts        ← filesystem + fetch loader, favicon helper
+    ui/useSettings.ts      ← localStorage persistence + CSS variable binding
+tailwind.config.ts         ← maps CSS variables into Tailwind tokens
+tsconfig.json              ← strict TS settings + path alias
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Data Model
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`public/data/bookmarks.json` includes:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `bookmarks[]`: `id`, `title`, `url`, `description`, optional `iconSrc`, `color`, `tags`, `order`, timestamps, and `featured`.
+- `settings`: grid defaults (`iconSize`, `radius`, `gap`, `columns { sm, md, lg }`).
 
-## Deploy on Vercel
+Update this file to curate tiles, tags, and layout defaults. Icons referenced with `/icons/*.svg` should exist in `public/icons`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Feature Highlights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Responsive App Grid**: CSS grid template `repeat(auto-fit, minmax(var(--grid-min), 1fr))` adapts across breakpoints. Icon, gap, and radius adjustments update CSS variables in real time.
+- **Framer Motion Transitions**: Shared layout IDs animate the selected tile into the detail view. Motion respects `prefers-reduced-motion`.
+- **Deep Linking**: URL query parameters track selection (`?selected=`), filters (`tags=`), search (`q=`), sort (`sort=`), and layout tweaks (`icon=`, `gap=`, `radius=`, `cols=`).
+- **Persistent Controls**: `useSettings` hydrates defaults from JSON, merges localStorage, applies query overrides, and writes updates back to both localStorage and CSS variables.
+- **Graceful Data Loading**: `loadBookmarks` fetches `/data/bookmarks.json` when a public origin is available and falls back to filesystem reads during builds. Friendly empty state messaging prevents crashes.
+- **Accessibility**: Skip link, focus rings, keyboard navigation (Enter/Space to open, Esc/backdrop to close), focus restoration, semantic regions, `aria-modal` detail view, and high-contrast tokens.
+- **Performance**: Lazy icon loading, minimal SVG assets, CSS variable design tokens, and CI guardrails (lint/build/type-check).
+
+## Customisation & Deployment
+
+- Update colours, typography, and spacing via CSS variables in `globals.css` and Tailwind tokens in `tailwind.config.ts`.
+- Extend controls or filters by editing `useSettings`, `ControlsBar`, and `Filters`.
+- Deploy to Vercel: `npm ci && npm run build`. Shared-element transitions and deep links work without extra configuration.
+
+Enjoy curating your personal app grid!

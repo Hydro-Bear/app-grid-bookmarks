@@ -1,0 +1,92 @@
+{
+  "bookmarks": [
+    {
+      "id": "notion",
+      "title": "Notion",
+      "url": "https://www.notion.so",
+      "description": "Workspace for docs, projects, and async collaboration with your team.",
+      "iconSrc": "/icons/notion.svg",
+      "color": "#111827",
+      "tags": ["work", "docs"],
+      "order": 10,
+      "featured": false,
+      "createdAt": "2024-01-08T09:00:00Z",
+      "updatedAt": "2024-03-02T10:15:00Z"
+    },
+    {
+      "id": "vercel",
+      "title": "Vercel",
+      "url": "https://vercel.com",
+      "description": "Ship Next.js apps with zero-config deployments, previews, and analytics.",
+      "iconSrc": "/icons/vercel.svg",
+      "color": "#000000",
+      "tags": ["dev", "deploy"],
+      "order": 20,
+      "featured": true,
+      "createdAt": "2024-02-14T15:45:00Z",
+      "updatedAt": "2024-05-28T08:12:00Z"
+    },
+    {
+      "id": "linear",
+      "title": "Linear",
+      "url": "https://linear.app",
+      "description": "Issue tracking reimagined for modern product teams with blazing fast UI.",
+      "iconSrc": "/icons/linear.svg",
+      "color": "#4c1d95",
+      "tags": ["work", "planning"],
+      "order": 30,
+      "featured": false,
+      "createdAt": "2024-03-20T12:00:00Z",
+      "updatedAt": "2024-06-18T07:48:00Z"
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "url": "https://github.com",
+      "description": "Home for your repositories, pull requests, and automation workflows.",
+      "iconSrc": "/icons/github.svg",
+      "color": "#0f172a",
+      "tags": ["dev", "code"],
+      "order": 40,
+      "featured": false,
+      "createdAt": "2024-04-12T16:30:00Z",
+      "updatedAt": "2024-04-29T18:05:00Z"
+    },
+    {
+      "id": "figma",
+      "title": "Figma",
+      "url": "https://www.figma.com",
+      "description": "Collaborative interface design and prototyping that feels multiplayer-first.",
+      "iconSrc": "/icons/figma.svg",
+      "color": "#0ea5e9",
+      "tags": ["design", "collab"],
+      "order": 50,
+      "featured": false,
+      "createdAt": "2024-05-02T09:42:00Z",
+      "updatedAt": "2024-05-30T14:22:00Z"
+    },
+    {
+      "id": "arc",
+      "title": "Arc Browser",
+      "url": "https://arc.net",
+      "description": "A creative browser with tidy spaces, boosts, and keyboard-first navigation.",
+      "iconSrc": "/icons/arc.svg",
+      "color": "#5b21b6",
+      "tags": ["inspiration", "new"],
+      "order": 60,
+      "featured": true,
+      "createdAt": "2024-06-01T11:15:00Z",
+      "updatedAt": "2024-06-24T19:45:00Z"
+    }
+  ],
+  "settings": {
+    "iconSize": 96,
+    "radius": 24,
+    "gap": 16,
+    "columns": {
+      "sm": 3,
+      "md": 4,
+      "lg": 6
+    }
+  }
+}
